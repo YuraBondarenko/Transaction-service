@@ -26,4 +26,5 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "account_from")
     private Account accountFrom;
+    private String reason;
 }
