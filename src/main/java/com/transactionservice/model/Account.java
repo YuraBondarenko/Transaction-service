@@ -18,7 +18,7 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "account_number")
+    @Column(name = "account_number", unique = true)
     private String accountNumber;
     @Enumerated(EnumType.STRING)
     @Column(name = "card_type")
