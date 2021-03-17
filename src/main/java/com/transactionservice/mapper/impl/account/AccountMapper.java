@@ -1,7 +1,7 @@
-package com.transactionservice.mapper.impl;
+package com.transactionservice.mapper.impl.account;
 
-import com.transactionservice.dto.request.AccountRequestDto;
-import com.transactionservice.dto.response.AccountResponseDto;
+import com.transactionservice.dto.request.account.AccountRequestDto;
+import com.transactionservice.dto.response.account.AccountResponseDto;
 import com.transactionservice.mapper.MapperToDto;
 import com.transactionservice.mapper.MapperToEntity;
 import com.transactionservice.model.Account;
