@@ -7,7 +7,9 @@ import com.transactionservice.mapper.MapperToEntity;
 import com.transactionservice.model.Account;
 import com.transactionservice.model.Client;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ClientMapper implements MapperToDto<ClientResponseDto, Client>,
         MapperToEntity<Client, ClientRequestDto> {
     @Override

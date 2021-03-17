@@ -5,7 +5,9 @@ import com.transactionservice.dto.response.AccountResponseDto;
 import com.transactionservice.mapper.MapperToDto;
 import com.transactionservice.mapper.MapperToEntity;
 import com.transactionservice.model.Account;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AccountMapper implements MapperToDto<AccountResponseDto, Account>,
         MapperToEntity<Account, AccountRequestDto> {
     @Override

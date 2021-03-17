@@ -6,7 +6,9 @@ import com.transactionservice.mapper.MapperToDto;
 import com.transactionservice.mapper.MapperToEntity;
 import com.transactionservice.model.Transaction;
 import com.transactionservice.service.AccountService;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TransactionMapper implements MapperToDto<TransactionResponseDto, Transaction>,
         MapperToEntity<Transaction, TransactionRequestDto> {
     private final AccountService accountService;
