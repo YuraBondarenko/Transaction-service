@@ -8,7 +8,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
 
@@ -21,11 +20,10 @@ public class Account {
     private Long id;
     @Column(name = "account_number")
     private String accountNumber;
-    private BigDecimal balance;
     @Enumerated(EnumType.STRING)
-    private Type type;
-    @ManyToOne
-    private User user;
+    @Column(name = "card_type")
+    private Type cardType;
+    private BigDecimal balance;
 
     public void setBalance(BigDecimal balance) {
         if (balance.compareTo(BigDecimal.ZERO) < 0) {
