@@ -1,6 +1,6 @@
 package com.transactionservice.service.impl;
 
-import com.transactionservice.model.User;
+import com.transactionservice.model.Client;
 import com.transactionservice.repository.UserRepository;
 import com.transactionservice.service.UserService;
 import java.util.List;
@@ -18,17 +18,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(User user) {
-        return userRepository.save(user);
+    public Client save(Client client) {
+        return userRepository.save(client);
     }
 
     @Override
-    public User getById(Long id) {
+    public Client getById(Long id) {
         return userRepository.getOne(id);
     }
 
     @Override
-    public List<User> getAll(int page, int size, String sortBy) {
+    public List<Client> getAll(int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return userRepository.findAll(pageable).getContent();
     }

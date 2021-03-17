@@ -1,12 +1,12 @@
 package com.transactionservice.service;
 
-import com.transactionservice.model.User;
+import com.transactionservice.model.Client;
 import java.util.List;
 
 public interface UserService {
-    User save(User user);
+    Client save(Client client);
 
-    User getById(Long id);
+    Client getById(Long id);
 
-    List<User> getAll(int page, int size, String sortBy);
+    List<Client> getAll(int page, int size, String sortBy);
 }
