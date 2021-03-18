@@ -43,8 +43,8 @@ public class TransactionMapper implements MapperToDto<TransactionResponseDto, Tr
     public Transaction getEntity(TransactionRequestDto dto) {
         Transaction transaction = new Transaction();
         transaction.setReason(dto.getReason());
-        transaction.setAccountFrom(accountService.getByNumber(dto.getAccountFrom()));
-        transaction.setAccountTo(accountService.getByNumber(dto.getAccountTo()));
+        transaction.setAccountFrom(accountService.getByNumber(dto.getAccountNumberFrom()));
+        transaction.setAccountTo(accountService.getByNumber(dto.getAccountNumberTo()));
         transaction.setAmount(dto.getAmount());
         return transaction;
     }
