@@ -1,20 +1,28 @@
-package com.transactionservice.mapper.impl;
+package com.transactionservice.mapper.impl.transaction;
 
-import com.transactionservice.dto.request.TransactionRequestDto;
-import com.transactionservice.dto.response.TransactionResponseDto;
+import com.transactionservice.dto.request.transaction.TransactionRequestDto;
+import com.transactionservice.dto.response.transaction.TransactionResponseDto;
 import com.transactionservice.mapper.MapperToDto;
 import com.transactionservice.mapper.MapperToEntity;
+import com.transactionservice.mapper.impl.client.ClientNameMapper;
 import com.transactionservice.model.Transaction;
 import com.transactionservice.service.AccountService;
+import com.transactionservice.service.ClientService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TransactionMapper implements MapperToDto<TransactionResponseDto, Transaction>,
         MapperToEntity<Transaction, TransactionRequestDto> {
     private final AccountService accountService;
+    private final ClientService clientService;
+    private final ClientNameMapper clientNameMapper;
 
-    public TransactionMapper(AccountService accountService) {
+    public TransactionMapper(
+            AccountService accountService, ClientService clientService,
+            ClientNameMapper clientNameMapper) {
         this.accountService = accountService;
+        this.clientService = clientService;
+        this.clientNameMapper = clientNameMapper;
     }
 
     @Override
@@ -24,8 +32,10 @@ public class TransactionMapper implements MapperToDto<TransactionResponseDto, Tr
         dto.setTimestamp(entity.getTimestamp());
         dto.setAccountNumberFrom(entity.getAccountFrom().getAccountNumber());
         dto.setAccountNumberTo(entity.getAccountTo().getAccountNumber());
-        dto.setReason(entity.getReason());
         dto.setAmount(entity.getAmount());
+        dto.setPayer(clientNameMapper.getDto(clientService.getByAccount(entity.getAccountFrom())));
+        dto.setRecipient(clientNameMapper.getDto(clientService
+                .getByAccount(entity.getAccountTo())));
         return dto;
     }
 

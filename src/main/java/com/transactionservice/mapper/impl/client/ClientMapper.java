@@ -1,9 +1,10 @@
-package com.transactionservice.mapper.impl;
+package com.transactionservice.mapper.impl.client;
 
-import com.transactionservice.dto.request.ClientRequestDto;
-import com.transactionservice.dto.response.ClientResponseDto;
+import com.transactionservice.dto.request.client.ClientRequestDto;
+import com.transactionservice.dto.response.client.ClientResponseDto;
 import com.transactionservice.mapper.MapperToDto;
 import com.transactionservice.mapper.MapperToEntity;
+import com.transactionservice.mapper.impl.account.AccountMapper;
 import com.transactionservice.model.Account;
 import com.transactionservice.model.Client;
 import java.util.stream.Collectors;
@@ -12,11 +13,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class ClientMapper implements MapperToDto<ClientResponseDto, Client>,
         MapperToEntity<Client, ClientRequestDto> {
+    private final AccountMapper accountMapper;
+
+    public ClientMapper(AccountMapper accountMapper) {
+        this.accountMapper = accountMapper;
+    }
+
     @Override
     public ClientResponseDto getDto(Client entity) {
         ClientResponseDto dto = new ClientResponseDto();
         dto.setId(entity.getId());
-        dto.setEmail(entity.getEmail());
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setAccountNumbers(entity.getAccounts().stream()
@@ -30,7 +36,11 @@ public class ClientMapper implements MapperToDto<ClientResponseDto, Client>,
         Client client = new Client();
         client.setFirstName(dto.getFirstName());
         client.setLastName(dto.getLastName());
-        client.setAccounts(dto.getAccounts());
+        if (dto.getAccounts() != null) {
+            client.setAccounts((dto.getAccounts().stream()
+                    .map(accountMapper::getEntity)
+                    .collect(Collectors.toList())));
+        }
         return client;
     }
 }

@@ -1,9 +1,11 @@
 package com.transactionservice.service;
 
+import com.transactionservice.model.Account;
 import com.transactionservice.model.Transaction;
+import java.util.List;
 
 public interface TransactionService {
     Transaction save(Transaction transaction);
 
-    //List<Transaction> getAllByUser(int page, int size, String sortBy,);
+    List<Transaction> getByAccounts(Account accountFrom, Account accountTo);
 }

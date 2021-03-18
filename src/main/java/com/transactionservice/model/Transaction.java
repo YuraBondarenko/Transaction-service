@@ -27,4 +27,9 @@ public class Transaction {
     @JoinColumn(name = "account_from")
     private Account accountFrom;
     private String reason;
+    private Status status;
+
+    public enum Status {
+        OK, ERROR;
+    }
 }
