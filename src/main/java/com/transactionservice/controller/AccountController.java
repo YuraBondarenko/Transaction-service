@@ -9,6 +9,7 @@ import com.transactionservice.service.AccountService;
 import com.transactionservice.service.ClientService;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +45,7 @@ public class AccountController {
     @PostMapping("/client-id/{id}")
     @Transactional
     public ResponseEntity<AccountResponseDto> save(
-            @PathVariable Long id, @RequestBody AccountRequestDto dto) {
+            @PathVariable Long id, @RequestBody @Valid AccountRequestDto dto) {
         Client client = clientService.getById(id);
         Account account = accountService.save(accountMapper.getEntity(dto));
         client.getAccounts().add(account);

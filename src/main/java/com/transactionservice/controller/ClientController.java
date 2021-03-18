@@ -9,6 +9,7 @@ import com.transactionservice.model.Client;
 import com.transactionservice.service.ClientService;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,14 +46,14 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientIdResponseDto> save(@RequestBody ClientRequestDto dto) {
+    public ResponseEntity<ClientIdResponseDto> save(@RequestBody @Valid ClientRequestDto dto) {
         return new ResponseEntity<>(clientIdMapper.getDto(clientService
                 .save(clientMapper.getEntity(dto))), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ClientIdResponseDto> update(
-            @PathVariable Long id, @RequestBody ClientRequestDto dto) {
+            @PathVariable Long id, @RequestBody @Valid ClientRequestDto dto) {
         Client client = clientMapper.getEntity(dto);
         client.setId(id);
         return new ResponseEntity<>(clientIdMapper
