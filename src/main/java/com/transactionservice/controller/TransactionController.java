@@ -10,6 +10,7 @@ import com.transactionservice.mapper.impl.transaction.TransactionMapper;
 import com.transactionservice.service.TransactionService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +39,7 @@ public class TransactionController {
 
     @PostMapping
     public ResponseEntity<List<TransactionIdResponseDto>> saveAll(
-            @RequestBody List<TransactionRequestDto> dtos) {
+            @RequestBody @Valid List<TransactionRequestDto> dtos) {
         List<TransactionIdResponseDto> responseDtos = new ArrayList<>();
         for (TransactionRequestDto dto : dtos) {
             responseDtos.add(transactionIdMapper.getDto(transactionService
