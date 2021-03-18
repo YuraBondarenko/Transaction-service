@@ -25,9 +25,11 @@ public class ClientMapper implements MapperToDto<ClientResponseDto, Client>,
         dto.setId(entity.getId());
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
-        dto.setAccountNumbers(entity.getAccounts().stream()
-                .map(Account::getAccountNumber)
-                .collect(Collectors.toList()));
+        if (dto.getAccountNumbers() != null) {
+            dto.setAccountNumbers(entity.getAccounts().stream()
+                    .map(Account::getAccountNumber)
+                    .collect(Collectors.toList()));
+        }
         return dto;
     }
 
